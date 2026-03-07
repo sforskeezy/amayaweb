@@ -116,7 +116,8 @@ export async function POST(request: Request) {
       console.log(`[EMAIL] No RESEND_API_KEY set. Simulating email to ${customer.email}`);
     }
 
-    await (client as any).mutation(api.customers.incrementEmailsSent, { id: customerId });
+    const convex = getConvex();
+    await (convex as any).mutation(api.customers.incrementEmailsSent, { id: customerId });
 
     return Response.json({
       success: true,
