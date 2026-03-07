@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local data
+/data
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/video/hero-reel.mp4
+public/video/hero-landscape.mp4
+public/video/hero-poster.jpg
