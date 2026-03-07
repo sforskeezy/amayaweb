@@ -32,4 +32,28 @@ export default defineSchema({
     order: v.number(),
     createdAt: v.number(),
   }),
+
+  customers: defineTable({
+    name: v.string(),
+    phone: v.string(),
+    email: v.optional(v.string()),
+    address: v.optional(v.string()),
+    vehicleYear: v.optional(v.string()),
+    vehicleMake: v.optional(v.string()),
+    vehicleModel: v.optional(v.string()),
+    vehicleType: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    totalSpent: v.number(),
+    jobCount: v.number(),
+    lastServiceDate: v.optional(v.string()),
+    lastServices: v.optional(v.array(v.string())),
+    emailsSent: v.number(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  adminConfig: defineTable({
+    key: v.string(),
+    value: v.string(),
+  }),
 });

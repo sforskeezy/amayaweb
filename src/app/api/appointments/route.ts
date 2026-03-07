@@ -1,25 +1,14 @@
-import { ConvexHttpClient } from "convex/browser";
+import { getConvex } from "@/lib/convex";
 import { api } from "../../../../convex/_generated/api";
-import * as db from "@/lib/db";
-
-const CONVEX_URL = process.env.NEXT_PUBLIC_CONVEX_URL;
-
-function getConvex() {
-  if (!CONVEX_URL) return null;
-  return new ConvexHttpClient(CONVEX_URL);
-}
 
 export async function GET() {
   try {
     const client = getConvex();
-    if (client) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data = await (client as any).query(api.appointments.list);
-      return Response.json(data);
-    }
-    return Response.json(db.getAppointments());
-  } catch {
-    return Response.json(db.getAppointments());
+    const data = await (client as any).query(api.appointments.list);
+    return Response.json(data);
+  } catch (error) {
+    console.error("Failed to fetch appointments:", error);
+    return Response.json([]);
   }
 }
 
@@ -27,12 +16,7 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     const client = getConvex();
-    if (client) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (client as any).mutation(api.appointments.create, data);
-    } else {
-      db.addAppointment(data);
-    }
+    await (client as any).mutation(api.appointments.create, data);
     return Response.json({ success: true });
   } catch (error) {
     console.error("Failed to save appointment:", error);
@@ -44,32 +28,24 @@ export async function PATCH(request: Request) {
   try {
     const body = await request.json();
     const { id, status, appointmentData } = body;
-
     const client = getConvex();
-    try {
-      if (client) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await (client as any).mutation(api.appointments.updateStatus, { id, status });
-      }
-    } catch {
-      /* Convex may not have this appointment — fall through to local */
-    }
-    db.updateAppointmentStatus(id, status);
+
+    await (client as any).mutation(api.appointments.updateStatus, { id, status });
 
     if (status === "completed" && appointmentData) {
-      db.addOrUpdateCustomer({
+      await (client as any).mutation(api.customers.addOrUpdate, {
         name: appointmentData.name,
         phone: appointmentData.phone,
-        email: appointmentData.email,
-        address: appointmentData.address,
-        vehicleYear: appointmentData.vehicleYear,
-        vehicleMake: appointmentData.vehicleMake,
-        vehicleModel: appointmentData.vehicleModel,
-        vehicleType: appointmentData.vehicleType,
-        notes: appointmentData.notes,
+        email: appointmentData.email || undefined,
+        address: appointmentData.address || undefined,
+        vehicleYear: appointmentData.vehicleYear || undefined,
+        vehicleMake: appointmentData.vehicleMake || undefined,
+        vehicleModel: appointmentData.vehicleModel || undefined,
+        vehicleType: appointmentData.vehicleType || undefined,
+        notes: appointmentData.notes || undefined,
         totalPrice: appointmentData.totalPrice || 0,
         services: (appointmentData.services || []).map((s: { name: string }) => s.name),
-        serviceDate: appointmentData.preferredDate,
+        serviceDate: appointmentData.preferredDate || undefined,
       });
     }
 
@@ -84,12 +60,7 @@ export async function DELETE(request: Request) {
   try {
     const { id } = await request.json();
     const client = getConvex();
-    if (client) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (client as any).mutation(api.appointments.remove, { id });
-    } else {
-      db.deleteAppointment(id);
-    }
+    await (client as any).mutation(api.appointments.remove, { id });
     return Response.json({ success: true });
   } catch (error) {
     console.error("Failed to delete appointment:", error);
