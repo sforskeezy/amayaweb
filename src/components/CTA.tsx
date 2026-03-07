@@ -8,7 +8,7 @@ import { useBooking } from "./BookingContext";
 export default function CTA() {
   const booking = useBooking();
   return (
-    <section id="contact" className="py-24 md:py-36 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 md:py-36 relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -21,7 +21,7 @@ export default function CTA() {
         <div className="absolute inset-0 bg-gradient-to-t from-bg-warm via-bg-warm/80 to-bg-warm" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-10 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ width: 0 }}
@@ -43,7 +43,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[var(--font-display)] text-4xl md:text-5xl lg:text-7xl tracking-[-0.02em] leading-[1.05] mb-6"
+            className="font-[var(--font-display)] text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-[-0.02em] leading-[1.05] mb-5 sm:mb-6"
           >
             Let&apos;s make your car{" "}
             <span className="italic text-gold">unforgettable.</span>
@@ -53,7 +53,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="text-text-secondary text-base md:text-lg max-w-lg mx-auto leading-relaxed mb-12"
+            className="text-text-secondary text-sm sm:text-base md:text-lg max-w-lg mx-auto leading-relaxed mb-8 sm:mb-12"
           >
             Serving Lugoff, Camden, Columbia, and surrounding areas. Free estimates, no obligations.
           </motion.p>
@@ -67,7 +67,7 @@ export default function CTA() {
           >
             <button
               onClick={booking.open}
-              className="group flex items-center gap-3 px-8 py-4 bg-gold hover:bg-gold-light text-bg-warm text-[12px] font-semibold tracking-[0.15em] uppercase transition-all duration-300 w-full sm:w-auto justify-center cursor-pointer"
+              className="group flex items-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-gold hover:bg-gold-light text-bg-warm text-[11px] sm:text-[12px] font-semibold tracking-[0.15em] uppercase transition-all duration-300 w-full sm:w-auto justify-center cursor-pointer"
             >
               Book a Detail
               <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -76,7 +76,7 @@ export default function CTA() {
               href="https://www.facebook.com/p/Amayas-Auto-Detailing-61576045287455/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-8 py-4 border border-white/15 hover:border-white/30 text-text text-[12px] font-medium tracking-[0.15em] uppercase transition-all duration-300 w-full sm:w-auto justify-center"
+              className="flex items-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 border border-white/15 hover:border-white/30 text-text text-[11px] sm:text-[12px] font-medium tracking-[0.15em] uppercase transition-all duration-300 w-full sm:w-auto justify-center"
             >
               <MessageCircle size={15} />
               Message on Facebook

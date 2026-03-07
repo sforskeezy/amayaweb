@@ -64,11 +64,11 @@ function AnimatedCounter({ value, suffix, label }: { value: number; suffix: stri
     <div className="text-center">
       <span
         ref={ref}
-        className="font-[var(--font-display)] text-4xl md:text-5xl lg:text-6xl font-bold text-gold block"
+        className="font-[var(--font-display)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gold block"
       >
         0{suffix}
       </span>
-      <span className="text-text-muted text-[11px] tracking-[0.2em] uppercase mt-2 block">{label}</span>
+      <span className="text-text-muted text-[10px] sm:text-[11px] tracking-[0.2em] uppercase mt-1.5 sm:mt-2 block">{label}</span>
     </div>
   );
 }
@@ -83,21 +83,21 @@ export default function About() {
   const imageScale = useTransform(scrollYProgress, [0, 0.3, 0.7], [0.95, 1, 1]);
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-20 sm:py-32 md:py-44 overflow-hidden">
       {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-gold/[0.03] rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-gold/[0.02] rounded-full blur-[100px]" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-10 relative z-10">
         {/* Section Header — Full Width, Dramatic */}
-        <div className="mb-20 md:mb-28">
+        <div className="mb-12 sm:mb-20 md:mb-28">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-gold text-[11px] tracking-[0.3em] uppercase mb-6"
+            className="text-gold text-[10px] sm:text-[11px] tracking-[0.3em] uppercase mb-4 sm:mb-6"
           >
             Why Amaya&apos;s
           </motion.p>
@@ -106,7 +106,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[var(--font-display)] text-5xl md:text-6xl lg:text-[5.5rem] tracking-[-0.03em] leading-[1.05] max-w-4xl"
+            className="font-[var(--font-display)] text-3xl sm:text-5xl md:text-6xl lg:text-[5.5rem] tracking-[-0.03em] leading-[1.05] max-w-4xl"
           >
             Not just clean.{" "}
             <motion.span
@@ -129,7 +129,7 @@ export default function About() {
         </div>
 
         {/* Main Content: Image + Text */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-32 md:mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 items-start mb-20 sm:mb-32 md:mb-40">
           {/* Image Column */}
           <motion.div
             style={{ y: imageY, scale: imageScale }}
@@ -152,7 +152,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-8 -right-4 lg:-right-12 bg-[#1a1a19]/95 backdrop-blur-xl border border-white/[0.08] p-6 lg:p-8 shadow-2xl"
+              className="absolute -bottom-6 right-2 sm:-bottom-8 sm:-right-4 lg:-right-12 bg-[#1a1a19]/95 backdrop-blur-xl border border-white/[0.08] p-4 sm:p-6 lg:p-8 shadow-2xl"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gold/10 flex items-center justify-center">
@@ -172,13 +172,13 @@ export default function About() {
           </motion.div>
 
           {/* Text + Features Column */}
-          <div className="lg:col-span-7 lg:pl-8">
+          <div className="lg:col-span-7 lg:pl-8 mt-8 lg:mt-0">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-text-secondary text-lg md:text-xl leading-[1.8] mb-6 max-w-xl"
+              className="text-text-secondary text-base sm:text-lg md:text-xl leading-[1.7] sm:leading-[1.8] mb-4 sm:mb-6 max-w-xl"
             >
               At Amaya&apos;s, detailing isn&apos;t a side hustle — it&apos;s a craft. Every vehicle is treated like our own.
             </motion.p>
@@ -187,31 +187,32 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-text-muted text-[15px] leading-[1.8] mb-14 max-w-xl"
+              className="text-text-muted text-[13px] sm:text-[15px] leading-[1.7] sm:leading-[1.8] mb-10 sm:mb-14 max-w-xl"
             >
               We use only professional-grade equipment and products, because your car deserves more than a bucket wash. From ceramic coatings to deep interior restoration, we bring the full detailing studio to your driveway.
             </motion.p>
 
-            {/* Features — Stacked, Premium Style */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+            {/* Features */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-10">
               {features.map((f, i) => (
                 <motion.div
                   key={f.title}
                   initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: 0.1 + i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   className="group relative"
                 >
                   <div className={`absolute -inset-3 bg-gradient-to-br ${f.accent} rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl`} />
                   <div className="relative">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-300">
-                        <f.icon size={18} className="text-gold" strokeWidth={1.5} />
+                    <div className="flex items-center gap-3 mb-2 sm:mb-3">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-300">
+                        <f.icon size={16} className="text-gold sm:hidden" strokeWidth={1.5} />
+                        <f.icon size={18} className="text-gold hidden sm:block" strokeWidth={1.5} />
                       </div>
-                      <h3 className="text-[15px] font-semibold tracking-wide group-hover:text-gold transition-colors duration-300">{f.title}</h3>
+                      <h3 className="text-[14px] sm:text-[15px] font-semibold tracking-wide group-hover:text-gold transition-colors duration-300">{f.title}</h3>
                     </div>
-                    <p className="text-text-muted text-[13px] leading-[1.8] pl-[52px]">{f.text}</p>
+                    <p className="text-text-muted text-[12px] sm:text-[13px] leading-[1.7] sm:leading-[1.8] pl-[48px] sm:pl-[52px]">{f.text}</p>
                   </div>
                 </motion.div>
               ))}
@@ -238,7 +239,7 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className="py-10 md:py-14 px-6"
+                  className="py-7 sm:py-10 md:py-14 px-4 sm:px-6"
                 >
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} label={stat.label} />
                 </motion.div>

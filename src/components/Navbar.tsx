@@ -42,12 +42,12 @@ export default function Navbar() {
             : "bg-transparent"
         )}
       >
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 lg:px-10 h-20">
+        <div className="max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-6 lg:px-10 h-16 sm:h-20">
           <a href="#" className="relative z-10">
             <img
               src="/logo.png"
               alt="Amaya's Mobile Auto Detail"
-              className="h-14 w-auto object-contain"
+              className="h-10 sm:h-14 w-auto object-contain"
             />
           </a>
 

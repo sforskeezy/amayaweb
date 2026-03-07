@@ -129,7 +129,7 @@ function ReviewCard({
         duration: 0.7,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className={`group relative p-6 md:p-8 border border-white/[0.05] hover:border-white/[0.1] transition-all duration-500 bg-gradient-to-br from-white/[0.02] to-transparent ${className}`}
+      className={`group relative p-5 sm:p-6 md:p-8 border border-white/[0.05] hover:border-white/[0.1] transition-all duration-500 bg-gradient-to-br from-white/[0.02] to-transparent ${className}`}
     >
       <Quote
         size={32}
@@ -142,7 +142,7 @@ function ReviewCard({
         text={review.text}
         speed={review.featured ? 15 : 22}
         delay={300 + index * 200}
-        className={`text-text/90 leading-[1.8] mb-6 min-h-[4em] ${review.featured ? "text-[17px]" : "text-[14px]"}`}
+        className={`text-text/90 leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-6 min-h-[3em] sm:min-h-[4em] ${review.featured ? "text-[15px] sm:text-[17px]" : "text-[13px] sm:text-[14px]"}`}
       />
 
       <motion.div
@@ -180,15 +180,15 @@ export default function Reviews() {
   const rest = reviews.slice(1);
 
   return (
-    <section id="reviews" className="py-24 md:py-36">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-20 gap-6">
+    <section id="reviews" className="py-16 sm:py-24 md:py-36">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-10">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-16 md:mb-20 gap-4 sm:gap-6">
           <div>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-gold text-[11px] tracking-[0.3em] uppercase mb-4"
+              className="text-gold text-[10px] sm:text-[11px] tracking-[0.3em] uppercase mb-3 sm:mb-4"
             >
               Testimonials
             </motion.p>
@@ -197,7 +197,7 @@ export default function Reviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-[var(--font-display)] text-4xl md:text-5xl lg:text-6xl tracking-[-0.02em]"
+              className="font-[var(--font-display)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[-0.02em]"
             >
               What Our Clients Say
             </motion.h2>
@@ -210,32 +210,32 @@ export default function Reviews() {
             transition={{ delay: 0.2 }}
             className="flex items-center gap-4"
           >
-            <div className="flex flex-col items-end">
-              <div className="flex gap-1 mb-1">
+            <div className="flex flex-col items-start sm:items-end">
+              <div className="flex gap-0.5 sm:gap-1 mb-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={18} className="text-gold fill-gold" />
+                  <Star key={i} size={14} className="text-gold fill-gold sm:w-[18px] sm:h-[18px]" />
                 ))}
               </div>
-              <span className="text-text-secondary text-[13px]">
+              <span className="text-text-secondary text-[12px] sm:text-[13px]">
                 5.0 on Google & Facebook
               </span>
             </div>
-            <div className="w-px h-10 bg-white/10" />
-            <div className="text-right">
-              <p className="text-3xl font-[var(--font-display)] font-bold text-gold">
+            <div className="w-px h-8 sm:h-10 bg-white/10" />
+            <div className="sm:text-right">
+              <p className="text-2xl sm:text-3xl font-[var(--font-display)] font-bold text-gold">
                 50+
               </p>
-              <p className="text-text-muted text-[12px]">Happy Clients</p>
+              <p className="text-text-muted text-[11px] sm:text-[12px]">Happy Clients</p>
             </div>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
           <div className="lg:col-span-5">
             <ReviewCard review={featured} index={0} className="h-full" />
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             {rest.map((review, i) => (
               <ReviewCard key={review.name} review={review} index={i + 1} />
             ))}

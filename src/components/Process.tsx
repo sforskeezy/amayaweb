@@ -70,7 +70,7 @@ function ProcessStep({
   return (
     <motion.div
       style={{ opacity: stepOpacity }}
-      className="relative py-10 md:py-0 md:px-8 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 md:border-r last:border-0 border-white/[0.06]"
+      className="relative py-8 sm:py-10 md:py-0 md:px-8 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 md:border-r last:border-0 border-white/[0.06]"
     >
       <motion.div
         style={{ width: barWidth }}
@@ -79,22 +79,22 @@ function ProcessStep({
 
       <motion.div
         style={{ scale: dotScale }}
-        className="absolute -top-[5px] right-0 md:right-auto md:left-0 w-[10px] h-[10px] rounded-full bg-gold shadow-[0_0_12px_rgba(212,168,67,0.6)]"
+        className="absolute -top-[5px] right-0 md:right-auto md:left-0 w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] rounded-full bg-gold shadow-[0_0_12px_rgba(212,168,67,0.6)]"
       />
 
       <motion.span
         style={{ color: numColor }}
-        className="font-[var(--font-display)] text-6xl md:text-7xl font-bold block mb-6 transition-colors duration-700"
+        className="font-[var(--font-display)] text-5xl sm:text-6xl md:text-7xl font-bold block mb-4 sm:mb-6 transition-colors duration-700"
       >
         {step.num}
       </motion.span>
       <motion.h3
         style={{ color: titleColor }}
-        className="text-lg font-medium mb-3 tracking-wide"
+        className="text-base sm:text-lg font-medium mb-2 sm:mb-3 tracking-wide"
       >
         {step.title}
       </motion.h3>
-      <p className="text-text-muted text-[14px] leading-relaxed">{step.text}</p>
+      <p className="text-text-muted text-[13px] sm:text-[14px] leading-relaxed">{step.text}</p>
     </motion.div>
   );
 }
@@ -112,21 +112,21 @@ export default function Process() {
 
   return (
     <section ref={containerRef} className="relative" style={{ minHeight: "250vh" }}>
-      <div className="sticky top-0 min-h-screen flex items-center py-24 md:py-36">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
+      <div className="sticky top-0 min-h-screen flex items-center py-16 sm:py-24 md:py-36">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-10 w-full">
           <motion.div
             style={{ opacity: headerOpacity, y: headerY }}
-            className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-24 gap-6"
+            className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 sm:mb-16 md:mb-24 gap-4 sm:gap-6"
           >
             <div>
-              <p className="text-gold text-[11px] tracking-[0.3em] uppercase mb-4">
+              <p className="text-gold text-[10px] sm:text-[11px] tracking-[0.3em] uppercase mb-3 sm:mb-4">
                 The Process
               </p>
-              <h2 className="font-[var(--font-display)] text-4xl md:text-5xl lg:text-6xl tracking-[-0.02em]">
+              <h2 className="font-[var(--font-display)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[-0.02em]">
                 How It Works
               </h2>
             </div>
-            <p className="text-text-muted text-sm max-w-xs">
+            <p className="text-text-muted text-[13px] sm:text-sm max-w-xs">
               From booking to that brand-new feeling — we make it effortless.
             </p>
           </motion.div>
