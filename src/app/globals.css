@@ -17,6 +17,7 @@
   --color-cream: #f5f0e8;
   --font-sans: var(--font-inter);
   --font-display: var(--font-playfair);
+  --font-accent: var(--font-script);
 }
 
 html {

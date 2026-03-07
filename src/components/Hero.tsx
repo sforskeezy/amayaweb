@@ -111,7 +111,9 @@ export default function Hero() {
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="font-[var(--font-display)] text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.9] tracking-[-0.02em] font-medium max-w-[900px]"
             >
-              The Art of
+              The{" "}
+              <span className="font-[var(--font-accent)] text-gold italic tracking-normal">Art</span>{" "}
+              of
             </motion.h1>
           </div>
           <div className="overflow-hidden">
@@ -119,7 +121,7 @@ export default function Hero() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="font-[var(--font-display)] text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.9] tracking-[-0.02em] font-medium italic text-gold"
+              className="font-[var(--font-display)] text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.9] tracking-[-0.02em] font-medium"
             >
               Detailing
             </motion.h1>
