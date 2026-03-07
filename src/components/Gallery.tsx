@@ -12,7 +12,7 @@ export default function Gallery() {
   );
 
   return (
-    <section id="gallery" className="py-16 sm:py-24 md:py-36">
+    <section id="gallery" className="py-12 sm:py-24 md:py-36">
       <div className="max-w-[900px] mx-auto px-5 sm:px-6 lg:px-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-12 gap-4">
@@ -77,7 +77,7 @@ export default function Gallery() {
                 View Page
               </a>
             </div>
-            <div className="relative" style={{ height: 500 }}>
+            <div className="relative h-[350px] sm:h-[500px]">
               {!fbLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center bg-white/[0.02]">
                   <div className="w-6 h-6 border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
@@ -86,7 +86,7 @@ export default function Gallery() {
               <iframe
                 src={`https://www.facebook.com/plugins/page.php?href=${pageUrl}&tabs=timeline&width=800&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false`}
                 width="100%"
-                height="500"
+                height="100%"
                 style={{
                   border: "none",
                   overflow: "hidden",

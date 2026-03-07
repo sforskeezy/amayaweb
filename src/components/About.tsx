@@ -2,8 +2,8 @@
 
 import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
-import { MapPin, Shield, Sparkles, Clock, ArrowUpRight, Droplets, Award } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { MapPin, Shield, Sparkles, Clock, Award } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
 
 const features = [
   {
@@ -75,15 +75,23 @@ function AnimatedCounter({ value, suffix, label }: { value: number; suffix: stri
 
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.3, 0.7], [0.95, 1, 1]);
+  const imageY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, -80]);
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-20 sm:py-32 md:py-44 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-14 sm:py-32 md:py-44 overflow-hidden">
       {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-gold/[0.03] rounded-full blur-[120px]" />
@@ -132,10 +140,10 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 items-start mb-20 sm:mb-32 md:mb-40">
           {/* Image Column */}
           <motion.div
-            style={{ y: imageY, scale: imageScale }}
+            style={isMobile ? undefined : { y: imageY }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative aspect-[3/4] overflow-hidden">
+            <div className="relative aspect-[4/3] sm:aspect-[3/4] overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=900"
                 alt="Detailing in progress"

@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { Star, Quote } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 
 const reviews = [
   {
@@ -66,19 +66,21 @@ function TypewriterText({
   speed = 18,
   delay = 0,
   className = "",
+  disabled = false,
 }: {
   text: string;
   speed?: number;
   delay?: number;
   className?: string;
+  disabled?: boolean;
 }) {
   const ref = useRef<HTMLParagraphElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || disabled) return;
 
     const timeout = setTimeout(() => {
       let i = 0;
@@ -94,7 +96,11 @@ function TypewriterText({
     }, delay);
 
     return () => clearTimeout(timeout);
-  }, [isInView, text, speed, delay]);
+  }, [isInView, text, speed, delay, disabled]);
+
+  if (disabled) {
+    return <p ref={ref} className={className}>{text}</p>;
+  }
 
   return (
     <p ref={ref} className={className}>
@@ -114,26 +120,28 @@ function ReviewCard({
   review,
   index,
   className = "",
+  disableTypewriter = false,
 }: {
   review: (typeof reviews)[0];
   index: number;
   className?: string;
+  disableTypewriter?: boolean;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{
-        delay: index * 0.1,
-        duration: 0.7,
+        delay: index * 0.06,
+        duration: 0.5,
         ease: [0.16, 1, 0.3, 1],
       }}
       className={`group relative p-5 sm:p-6 md:p-8 border border-white/[0.05] hover:border-white/[0.1] transition-all duration-500 bg-gradient-to-br from-white/[0.02] to-transparent ${className}`}
     >
       <Quote
-        size={32}
-        className="text-gold/20 mb-4 rotate-180"
+        size={24}
+        className="text-gold/20 mb-3 sm:mb-4 rotate-180 sm:w-8 sm:h-8"
         strokeWidth={1}
         fill="currentColor"
       />
@@ -142,7 +150,8 @@ function ReviewCard({
         text={review.text}
         speed={review.featured ? 15 : 22}
         delay={300 + index * 200}
-        className={`text-text/90 leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-6 min-h-[3em] sm:min-h-[4em] ${review.featured ? "text-[15px] sm:text-[17px]" : "text-[13px] sm:text-[14px]"}`}
+        disabled={disableTypewriter}
+        className={`text-text/90 leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-6 ${review.featured ? "text-[14px] sm:text-[17px]" : "text-[13px] sm:text-[14px]"}`}
       />
 
       <motion.div
@@ -176,27 +185,36 @@ function ReviewCard({
 }
 
 export default function Reviews() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const featured = reviews[0];
-  const rest = reviews.slice(1);
+  const rest = isMobile ? reviews.slice(1, 4) : reviews.slice(1);
 
   return (
-    <section id="reviews" className="py-16 sm:py-24 md:py-36">
+    <section id="reviews" className="py-14 sm:py-24 md:py-36">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-10">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-16 md:mb-20 gap-4 sm:gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-16 md:mb-20 gap-4 sm:gap-6">
           <div>
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="text-gold text-[10px] sm:text-[11px] tracking-[0.3em] uppercase mb-3 sm:mb-4"
             >
               Testimonials
             </motion.p>
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="font-[var(--font-display)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[-0.02em]"
             >
               What Our Clients Say
@@ -204,10 +222,10 @@ export default function Reviews() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
             className="flex items-center gap-4"
           >
             <div className="flex flex-col items-start sm:items-end">
@@ -232,12 +250,12 @@ export default function Reviews() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
           <div className="lg:col-span-5">
-            <ReviewCard review={featured} index={0} className="h-full" />
+            <ReviewCard review={featured} index={0} className="h-full" disableTypewriter={isMobile} />
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             {rest.map((review, i) => (
-              <ReviewCard key={review.name} review={review} index={i + 1} />
+              <ReviewCard key={review.name} review={review} index={i + 1} disableTypewriter={isMobile} />
             ))}
           </div>
         </div>

@@ -8,7 +8,7 @@ import { useBooking } from "./BookingContext";
 export default function CTA() {
   const booking = useBooking();
   return (
-    <section id="contact" className="py-16 sm:py-24 md:py-36 relative overflow-hidden">
+    <section id="contact" className="py-14 sm:py-24 md:py-36 relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
