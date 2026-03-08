@@ -61,9 +61,52 @@ function AnimatedCounter({ value, suffix, label }: { value: number; suffix: stri
   );
 }
 
+function TireTread() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <svg
+        className="absolute -left-[10%] top-[10%] w-[120%] h-[120%] opacity-[0.035]"
+        viewBox="0 0 1200 800"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        {/* Left tire track */}
+        <g transform="rotate(-12 600 400)">
+          {/* Outer track lines */}
+          <rect x="240" y="-100" width="4" height="1100" rx="2" fill="white" />
+          <rect x="320" y="-100" width="4" height="1100" rx="2" fill="white" />
+          {/* Tread blocks — chevron pattern */}
+          {Array.from({ length: 28 }).map((_, i) => (
+            <g key={`l-${i}`} transform={`translate(0, ${i * 38 - 80})`}>
+              <rect x="248" y="0" width="68" height="6" rx="1" fill="white" transform="skewY(-15)" />
+              <rect x="248" y="14" width="68" height="6" rx="1" fill="white" transform="skewY(15)" />
+            </g>
+          ))}
+        </g>
+        {/* Right tire track */}
+        <g transform="rotate(-12 600 400)">
+          <rect x="820" y="-100" width="4" height="1100" rx="2" fill="white" />
+          <rect x="900" y="-100" width="4" height="1100" rx="2" fill="white" />
+          {Array.from({ length: 28 }).map((_, i) => (
+            <g key={`r-${i}`} transform={`translate(0, ${i * 38 - 80})`}>
+              <rect x="828" y="0" width="68" height="6" rx="1" fill="white" transform="skewY(-15)" />
+              <rect x="828" y="14" width="68" height="6" rx="1" fill="white" transform="skewY(15)" />
+            </g>
+          ))}
+        </g>
+      </svg>
+      {/* Fade edges so tracks feel like they drive through */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-bg-warm to-transparent z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg-warm to-transparent z-[1]" />
+    </div>
+  );
+}
+
 export default function About() {
   return (
     <section id="about" className="relative py-14 sm:py-20 md:py-28 overflow-hidden">
+      <TireTread />
       <div className="max-w-[1100px] mx-auto px-5 sm:px-6 lg:px-10 relative z-10">
         {/* Header — compact */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-14">
