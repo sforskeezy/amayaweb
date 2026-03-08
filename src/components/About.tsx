@@ -67,7 +67,7 @@ function TireTread() {
       <img
         src="/tire-marks.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.12] mix-blend-lighten"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.08]"
       />
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-bg-warm to-transparent z-[1]" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bg-warm to-transparent z-[1]" />
