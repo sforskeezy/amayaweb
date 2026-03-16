@@ -36,6 +36,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://marketing.motra.io/api/tracker.js?id=6p_1c9be084f7723cb3"></script>
+      </head>
       <body className={`${inter.variable} ${playfair.variable} ${dancing.variable} antialiased`}>
         <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
